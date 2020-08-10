@@ -7,11 +7,18 @@ From the instructions in the assignment:
         calculated, along with units, and any other relevant information.
         
 The assignment asks for an analysis on the MEAN and STD of all variables.  We'll
-use text manipulation techniques on column names to find all the proper 
-variables.  Then we'll create data tables of only the required fields and change
-column names appropriately in both the test and the training data files.  We'll 
-join participant and activity data to the two data tables then merge the result 
-with each other to create one tidy data table.
+use text manipulation on "column names"features.txt"" to find all the proper
+variables.  
+
+Then we'll create data tables of only the required fields and change
+column names appropriately in both "X_test.txt" and "X_train.txt".  
+
+The activity files "y_test.txt" and "y_train.txt" are left joined with
+"activity_labels.txt" to make the output more readable.  Activity labels are
+read in as factors
+
+"subject_train.txt" and "subject_test.txt" are combined with the appropriate
+activity (y) table and then with the respective data (X) table.
 
 Script Dependencies
 
@@ -35,5 +42,10 @@ column names
 Read only the desired columns with fread
         
         tst <- fread("./train/x_train.txt", select = filteredvarnames$V1)
+        
+We'll improve readability by adding words to "activity.txt".  We do this by
+using left-join on "activity_levels" and both "y_train" and "y_test" 
+
+        readable_activity_variable <- left_join(y_train, activity_levels)
         
         
