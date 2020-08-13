@@ -32,7 +32,7 @@ run_analysis <- function() {
      ## 
      
      test_file <- "./UCI HAR Dataset/test/X_test.txt"
-     train_file <- "./UCI HAR Dataset/test/X_train.txt"
+     train_file <- "./UCI HAR Dataset/train/X_train.txt"
      X_test <- fread(test_file, select = filteredvarnames$V1)
      X_train <- fread(train_file, select = filteredvarnames$V1)
      
@@ -68,7 +68,8 @@ run_analysis <- function() {
      
      sy_train <- s_train[, Activity:=y_train$V2]
      sy_test <- s_test[, Activity:=y_test$V2]
-     setnames(c(sy_test, sy_train),"V1","Subject")
+     setnames(sy_test,"V1","Subject")
+     setnames(sy_train,"V1","Subject")
      
      ## Create the tidy table containing all subjects, all activities, all data
      ## of only the mean and std variables.  Rename all columns appropriately.
@@ -77,9 +78,13 @@ run_analysis <- function() {
      full_test_dt <- sy_test[,filteredvarnames$V2:=X_test]
      full_train_dt <- sy_train[,filteredvarnames$V2:=X_train]
      
-     full_data <- rbind(list(full_test_dt, full_train_dt))
+     full_data <- rbindlist(list(full_test_dt, full_train_dt))
      
      ## Now create the final table with groupings and averages
      ## 
-     ## 
+     
+     rslt <- full_data[, lapply(.SD, mean), by = .(Subject, Activity)]
+     rslt <- rslt[order(Subject, Activity)]
+     fwrite(rslt, "tidy_dataset.csv")
+
 }

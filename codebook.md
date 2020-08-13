@@ -51,34 +51,17 @@ activity (y) table and then with the respective data (X) table.
         
         - full_train-dt - X_train appended with sy_train
         
-With these tidy data tables we can order, group, and take the mean of each col.
+We will rbind these two tables for one large tidy data table.  Then we can
+order, group, and take the mean of each col.
+
+        - rslt - Tidy data table:
+                - of mean mean readings
+                - of the mean std readings
+                - grouped by Subject and Activity
+                - Ordered by Subject and Activity
 
 Script Dependencies
 
 data.table
 dplyr
 
-Selecting Variables
-
-The assignment asks for only "mean" and "std" variables of all measurements.  We
-filter all names for only names containing "mean" or "std".  This results in 86
-column names
-
-        varNames - data table read from "features.txt"
-                V1 - column number
-                V2 - feature name
-                
-        filteredvarnames <- varNames[grep(".*[Mm]ean|.*[Ss]td",V2),]
-                V1 - column number
-                V2 - feature name (only contains "mean" or "std")
-        
-Read only the desired columns with fread
-        
-        tst <- fread("./train/x_train.txt", select = filteredvarnames$V1)
-        
-We'll improve readability by adding words to "activity.txt".  We do this by
-using left-join on "activity_levels" and both "y_train" and "y_test" 
-
-        readable_activity_variable <- left_join(y_train, activity_levels)
-        
-        
