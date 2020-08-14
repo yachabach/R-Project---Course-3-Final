@@ -12,15 +12,21 @@
 ##	From the data set in step 4, creates a second, independent tidy data set
 ##	with the average of each variable for each activity and each subject.
 ##	
-## It requires the working directory contain the directory "UCI HAR Dataset".
+## It requires the working directory contain the directory "UCI HAR Dataset" 
+## which should contain all data files, test, and train directories.
 ## After it verifies the existence of that directory it does not check for the
 ## existence of any other files.
 ## 
 ## 
 run_analysis <- function() {
 
-        if (!file.exists("./UCI HAR Dataset")) stop("UCI HAR Dataset not in 
-        working directory.")
+        if (!file.exists("./UCI HAR Dataset"))  { #stop("UCI HAR Dataset not in working directory.")
+        
+                zfile <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+                download.file(zfile,"temp.zip")
+                unzip("temp.zip")
+        
+        }
         
         ##Build a list of appropriate variable names
         
@@ -84,7 +90,8 @@ run_analysis <- function() {
      ## 
      
      rslt <- full_data[, lapply(.SD, mean), by = .(Subject, Activity)]
-     rslt <- rslt[order(Subject, Activity)]
+     rslt <<- rslt[order(Subject, Activity)]
      fwrite(rslt, "tidy_dataset.csv")
+     rslt
 
 }
