@@ -5,20 +5,22 @@ curriculum.  This repo contains the script run_analysis.r.  The script:
         
         - filters column variables to those containing "mean" or "std"
         
-        - averages all variables by Subject and Activity.
+        - averages all selected variables
         
-        - writes a tidy dataset to tidydataset.csv
+        - groups and orders the data by Subject then Activity.
+        
+        - writes a tidy dataset to tidy_dataset.csv
         
 The data that was provided is in the file:
         
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-        
-available on the assignment website.
 
-Make sure run_analysis is called with the working directory set to one 
-containing the unzipped file structure:
+run_analysis checks the working directory for a directory called:
 
         UCI HAR Dataset
+        
+If this directory is not in the working directory, run_analysis will 
+download and unzip this file.  The process can take up to 5 minutes.
         
 From the instructions in the assignment:
 
@@ -26,8 +28,9 @@ From the instructions in the assignment:
         codebooks with the data to indicate all the variables and summaries 
         calculated, along with units, and any other relevant information.
         
-The assignment asks for an analysis on the MEAN and STD of all
-variables.  We'll use text manipulation on "features.txt"" to find all the 
+The assignment asks for an analysis of all MEAN and STD variables.
+
+We'll use text manipulation on "features.txt"" to find all the 
 proper variables.  
 
         - filteredvarnames - data.table - only names with "mean" or "std"
@@ -46,7 +49,7 @@ The activity files "y_test.txt" and "y_train.txt" are left joined with
 
         - activity_labels - data.table of activity labels and thier index
                 V1 - index
-                V2 - label (e.g. WALKING, STANDING, etc.)
+                V2 - activity label (e.g. WALKING, STANDING, etc.)
                 
         - y_test_act - joined y_test with activity labels
         
@@ -76,7 +79,7 @@ order, group, and take the mean of each col.
 
         - rslt - Tidy data table:
                 - of mean mean readings
-                - of the mean std readings
+                - of mean std readings
                 - grouped by Subject and Activity
                 - Ordered by Subject and Activity
 

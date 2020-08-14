@@ -1,6 +1,6 @@
 ---
 title: "Codebook"
-author: "Dave"
+author: "Dave Yachabach"
 date: "8/14/2020"
 output: html_document
 ---
@@ -25,35 +25,38 @@ The function run_analysis() produces a tidy dataset in the file
 
 The dataset is grouped and ordered by Subject, then Activity.  The activity variable is a factor - it's ordering is specified by Levels.  
 
-Variable|Class|Description
----|---|-----------
-Subject|Num|The number of the participant.  Each participant will have 6 entries, One for each activity  
-Activity|Factor|The actvities that were identified through accelerometer data. Levels = WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING  
+Index|Variable|Class|Description
+--|---|---|-----------
+1|Subject|Num|Participant's identifying number.  Each participant will have 6 entries, one for each activity  
+2|Activity|Factor|The actvities that were identified through accelerometer data. Levels = WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING  
 
-***
+***  
 ### Mean of Motion Data Variables  
 
-The assignment called for the mean of a subset of the provided data.  Only measurements of  
+The assignment called for a tidy dataset of the mean of certain variables.  Only variables with measurements of  
 
 - mean  
 - std  
 
-are to be part of the output.  All variables are numeric.  Their names are as follows:  
+are to be part of the output.  All variables are numeric.  Their indexes and names in the "tidy_dataset.csv" file are as follows:  
 
 
 ```{r show_varnames}
 
-knitr::opts_chunk$set(fig.width=12)
-
 tidy_set <- fread("https://raw.githubusercontent.com/yachabach/R-Project---Course-3-Final/master/tidy_dataset.csv")
 
-colnames(tidy_set[,3:length(colnames(tidy_set))])
+name_set <- data.table("Variable Index" = 1:length(tidy_set), "Variable Name" = colnames(tidy_set))
+
+knitr::kable(name_set, align = 'cl')
 ```
-***
+
+***  
+
+### Small Sample of tidy_dataset structure  
+This is an example of the structure of tidy_dataset.  It is ordered by Subject and then by activity.  Since Activity is a factor, it is ordered by the file Activity_Labels.txt in the original data.  This sample only displays the means of first 4 of 86 mean motion variables.  
+
 ```{r show_sample}
 
-knitr::opts_chunk$set(fig.width=12)
-
-tidy_set[1:20,1:5]
+knitr::kable(tidy_set[1:20, 1:6], align = 'clcccc')
 ```
 
