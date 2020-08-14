@@ -28,6 +28,9 @@ run_analysis <- function() {
         
         }
         
+        require(dplyr)
+        require(data.table)
+        
         ##Build a list of appropriate variable names
         
      varfile <- "./UCI HAR Dataset/features.txt"
