@@ -1,12 +1,6 @@
----
-title: "README"
-author: "Dave Yachabach"
-date: "8/14/2020"
-output:
-  html_document:
-    df_print: paged
+# README
+## run_analysis
 
----  
 
 # Files in this Project  
 
@@ -26,7 +20,7 @@ The script run_analysis.r does the following:
 - filters column variables to those containing "mean" or "std"  
 - averages all selected variables  
 - groups and orders the data by Subject then Activity  
-- writes a tidy dataset to tidy_dataset.csv  
+- writes a tidy dataset to tidy_dataset.txt  
           
 # Data Source  
 
