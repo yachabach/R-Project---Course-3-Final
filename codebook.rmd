@@ -1,8 +1,10 @@
 ---
-title: "Codebook"
+title: "Course 3 Final Project Codebook"
 author: "Dave Yachabach"
 date: "8/14/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,28 +18,26 @@ require(data.table)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Course 3 Final Project Codebook  
-
 The function run_analysis() produces a tidy dataset in the file 
 "tidy_dataset.csv".  That file contains the following variables: 
 
-### Order and grouping variables
+# Order and Grouping Variables
 
 The dataset is grouped and ordered by Subject, then Activity.  The activity variable is a factor - it's ordering is specified by Levels.  
 
 Index|Variable|Class|Description
---|---|---|-----------
+-|-|-|-----
 1|Subject|Num|Participant's identifying number.  Each participant will have 6 entries, one for each activity  
 2|Activity|Factor|The actvities that were identified through accelerometer data. Levels = WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING  
 
 ***  
-### Mean of Motion Data Variables  
+# Mean of Motion Data Variables  
 
 The assignment called for a tidy dataset of the mean of certain variables.  Only variables with measurements of  
 
 - mean  
 - std  
-
+  
 are to be part of the output.  All variables are numeric.  Their indexes and names in the "tidy_dataset.csv" file are as follows:  
 
 
@@ -52,11 +52,11 @@ knitr::kable(name_set, align = 'cl')
 
 ***  
 
-### Small Sample of tidy_dataset structure  
-This is an example of the structure of tidy_dataset.  It is ordered by Subject and then by activity.  Since Activity is a factor, it is ordered by the file Activity_Labels.txt in the original data.  This sample only displays the means of first 4 of 86 mean motion variables.  
+# Small Sample of tidy_dataset structure  
+This is an example of the structure of tidy_dataset.  It is ordered by Subject and then by activity.  Since Activity is a factor, it is ordered by the file Activity_Labels.txt in the original data.  This sample only displays the means of first 3 of 86 mean motion variables.  
 
 ```{r show_sample}
 
-knitr::kable(tidy_set[1:20, 1:6], align = 'clcccc')
+knitr::kable(tidy_set[1:20, 1:5], align = 'clcccc')
 ```
 
