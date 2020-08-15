@@ -93,7 +93,7 @@ run_analysis <- function() {
      ## 
      
      rslt <- full_data[, lapply(.SD, mean), by = .(Subject, Activity)]
-     rslt <- rslt[order(Subject, Activity)]
+     rslt <- rslt[order(Activity, Subject)]
      write.table(rslt, "tidy_dataset.txt",row.names = FALSE)
      rslt
 
