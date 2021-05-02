@@ -1,4 +1,16 @@
 # README
+
+This repository has examples for:  
+
+- Codebook Design  
+- file manipulation  
+- Grep  
+- Joins  
+- Kable tables  
+
+It is from Corsera Course 3.  The project dealt with getting data and creating tidy datasets.  
+
+
 ## run_analysis
 
 
